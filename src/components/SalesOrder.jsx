@@ -1,28 +1,39 @@
-import React, { useState } from "react";
-import "./SalesOrder.css";
+import React, { useState } from 'react';
+import './SalesOrder.css';
 
 const SalesOrder = () => {
   const [orderData, setOrderData] = useState({
-    orderNumber: "",
-    orderDate: new Date().toISOString().split("T")[0],
-    customerCode: "",
-    customerNumber: "",
+    orderNumber: '',
+    orderDate: new Date().toISOString().split('T')[0],
+    customerCode: '',
+    customerNumber: '',
     subtotalBeforeTax: 0,
     discountAmount: 0,
     taxAmount: 0,
-    salesperson: "",
-    dueDate: "",
-    installer: "",
-    customerName: "",
-    warehouse: "",
+    salesperson: '',
+    dueDate: '',
+    installer: '',
+    customerName: '',
+    warehouse: '',
     isExport: false,
     totalAmount: 0,
     paidAmount: 0,
     balanceAmount: 0,
-    settlementDate: "",
-    notes: "",
-    taxType: "included",
-    items: [],
+    settlementDate: '',
+    notes: '',
+    taxType: 'included',
+    items: [
+      {
+        id: Date.now(),
+        productCode: '',
+        unitPrice: 0,
+        quantity: 0,
+        subtotal: 0,
+        warehouse: '',
+        productName: '',
+        unit: '',
+      },
+    ],
   });
 
   const handleItemChange = (index, field, value) => {
@@ -32,7 +43,7 @@ const SalesOrder = () => {
       [field]: value,
     };
 
-    if (field === "quantity" || field === "unitPrice") {
+    if (field === 'quantity' || field === 'unitPrice') {
       updatedItems[index].subtotal =
         updatedItems[index].quantity * updatedItems[index].unitPrice;
     }
@@ -50,37 +61,37 @@ const SalesOrder = () => {
         ...orderData.items,
         {
           id: Date.now(),
-          productCode: "",
+          productCode: '',
           unitPrice: 0,
           quantity: 0,
           subtotal: 0,
-          warehouse: "",
-          productName: "",
-          unit: "",
+          warehouse: '',
+          productName: '',
+          unit: '',
         },
       ],
     });
   };
 
   return (
-    <div className="sales-order-window">
-      <div className="window-title">
+    <div className='sales-order-window'>
+      <div className='window-title'>
         銷售作業 2025/04/10 PM 06:10 使用者:李中富 Server:
       </div>
 
-      <div className="sales-order">
-        <div className="order-header">
-          <div className="tab-title-bar">
-            <div className="tab-title">銷售主檔</div>
+      <div className='sales-order'>
+        <div className='order-header'>
+          <div className='tab-title-bar'>
+            <div className='tab-title'>銷售主檔</div>
           </div>
 
-          <div className="header-form">
-            <div className="form-left">
-              <div className="form-row">
-                <div className="form-group">
+          <div className='header-form'>
+            <div className='form-left'>
+              <div className='form-row'>
+                <div className='form-group'>
                   <label>銷售單號:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.orderNumber}
                     onChange={(e) =>
                       setOrderData({
@@ -90,20 +101,20 @@ const SalesOrder = () => {
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>銷售日期:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.orderDate}
                     onChange={(e) =>
                       setOrderData({ ...orderData, orderDate: e.target.value })
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>客戶編號:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.customerCode}
                     onChange={(e) =>
                       setOrderData({
@@ -113,10 +124,10 @@ const SalesOrder = () => {
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>客戶實號:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.customerNumber}
                     onChange={(e) =>
                       setOrderData({
@@ -128,19 +139,19 @@ const SalesOrder = () => {
                 </div>
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
+              <div className='form-row'>
+                <div className='form-group'>
                   <label>未稅小計:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.subtotalBeforeTax}
                     readOnly
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>折讓金額:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.discountAmount}
                     onChange={(e) =>
                       setOrderData({
@@ -150,14 +161,14 @@ const SalesOrder = () => {
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>稅額:</label>
-                  <input type="text" value={orderData.taxAmount} readOnly />
+                  <input type='text' value={orderData.taxAmount} readOnly />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>銷售人員:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.salesperson}
                     onChange={(e) =>
                       setOrderData({
@@ -169,31 +180,31 @@ const SalesOrder = () => {
                 </div>
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
+              <div className='form-row'>
+                <div className='form-group'>
                   <label>帳款日期:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.dueDate}
                     onChange={(e) =>
                       setOrderData({ ...orderData, dueDate: e.target.value })
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>安裝人員:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.installer}
                     onChange={(e) =>
                       setOrderData({ ...orderData, installer: e.target.value })
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>姓名:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.customerName}
                     onChange={(e) =>
                       setOrderData({
@@ -203,18 +214,18 @@ const SalesOrder = () => {
                     }
                   />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>預設倉庫:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.warehouse}
                     onChange={(e) =>
                       setOrderData({ ...orderData, warehouse: e.target.value })
                     }
                   />
-                  <label className="checkbox-label">
+                  <label className='checkbox-label'>
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={orderData.isExport}
                       onChange={(e) =>
                         setOrderData({
@@ -228,23 +239,23 @@ const SalesOrder = () => {
                 </div>
               </div>
 
-              <div className="form-row">
-                <div className="form-group">
+              <div className='form-row'>
+                <div className='form-group'>
                   <label>金額合計:</label>
-                  <input type="text" value={orderData.totalAmount} readOnly />
+                  <input type='text' value={orderData.totalAmount} readOnly />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>已付金額:</label>
-                  <input type="text" value={orderData.paidAmount} readOnly />
+                  <input type='text' value={orderData.paidAmount} readOnly />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>未結金額:</label>
-                  <input type="text" value={orderData.balanceAmount} readOnly />
+                  <input type='text' value={orderData.balanceAmount} readOnly />
                 </div>
-                <div className="form-group">
+                <div className='form-group'>
                   <label>結清日期:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.settlementDate}
                     onChange={(e) =>
                       setOrderData({
@@ -256,32 +267,32 @@ const SalesOrder = () => {
                 </div>
               </div>
 
-              <div className="form-row">
-                <div className="form-group full-width">
+              <div className='form-row'>
+                <div className='form-group full-width'>
                   <label>附記事項:</label>
                   <input
-                    type="text"
+                    type='text'
                     value={orderData.notes}
                     onChange={(e) =>
                       setOrderData({ ...orderData, notes: e.target.value })
                     }
-                    className="notes-input"
+                    className='notes-input'
                   />
                 </div>
               </div>
             </div>
 
-            <div className="form-right">
-              <div className="form-row">
-                <div className="form-group tax-type">
+            <div className='form-right'>
+              <div className='form-row'>
+                <div className='form-group tax-type'>
                   <label>稅別:</label>
-                  <div className="radio-group">
+                  <div className='radio-group'>
                     <label>
                       <input
-                        type="radio"
-                        name="taxType"
-                        value="exempt"
-                        checked={orderData.taxType === "exempt"}
+                        type='radio'
+                        name='taxType'
+                        value='exempt'
+                        checked={orderData.taxType === 'exempt'}
                         onChange={(e) =>
                           setOrderData({
                             ...orderData,
@@ -293,10 +304,10 @@ const SalesOrder = () => {
                     </label>
                     <label>
                       <input
-                        type="radio"
-                        name="taxType"
-                        value="external"
-                        checked={orderData.taxType === "external"}
+                        type='radio'
+                        name='taxType'
+                        value='external'
+                        checked={orderData.taxType === 'external'}
                         onChange={(e) =>
                           setOrderData({
                             ...orderData,
@@ -308,10 +319,10 @@ const SalesOrder = () => {
                     </label>
                     <label>
                       <input
-                        type="radio"
-                        name="taxType"
-                        value="included"
-                        checked={orderData.taxType === "included"}
+                        type='radio'
+                        name='taxType'
+                        value='included'
+                        checked={orderData.taxType === 'included'}
                         onChange={(e) =>
                           setOrderData({
                             ...orderData,
@@ -328,9 +339,9 @@ const SalesOrder = () => {
           </div>
         </div>
 
-        <div className="order-items">
-          <div className="tab-title">銷售明細</div>
-          <div className="order-table">
+        <div className='order-items'>
+          <div className='tab-title'>銷售明細</div>
+          <div className='order-table'>
             <table>
               <thead>
                 <tr>
@@ -350,21 +361,21 @@ const SalesOrder = () => {
                     <td>{index + 1}</td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.productCode}
                         onChange={(e) =>
-                          handleItemChange(index, "productCode", e.target.value)
+                          handleItemChange(index, 'productCode', e.target.value)
                         }
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.unitPrice}
                         onChange={(e) =>
                           handleItemChange(
                             index,
-                            "unitPrice",
+                            'unitPrice',
                             Number(e.target.value)
                           )
                         }
@@ -372,12 +383,12 @@ const SalesOrder = () => {
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.quantity}
                         onChange={(e) =>
                           handleItemChange(
                             index,
-                            "quantity",
+                            'quantity',
                             Number(e.target.value)
                           )
                         }
@@ -386,28 +397,28 @@ const SalesOrder = () => {
                     <td>{item.subtotal}</td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.warehouse}
                         onChange={(e) =>
-                          handleItemChange(index, "warehouse", e.target.value)
+                          handleItemChange(index, 'warehouse', e.target.value)
                         }
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.productName}
                         onChange={(e) =>
-                          handleItemChange(index, "productName", e.target.value)
+                          handleItemChange(index, 'productName', e.target.value)
                         }
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type='text'
                         value={item.unit}
                         onChange={(e) =>
-                          handleItemChange(index, "unit", e.target.value)
+                          handleItemChange(index, 'unit', e.target.value)
                         }
                       />
                     </td>
@@ -418,7 +429,7 @@ const SalesOrder = () => {
           </div>
         </div>
 
-        <div className="button-bar">
+        <div className='button-bar'>
           <button onClick={handleAddItem}>新增</button>
           <button>修改</button>
           <button>刪除</button>
@@ -430,9 +441,9 @@ const SalesOrder = () => {
           <button>已過濾</button>
         </div>
 
-        <div className="status-bar">
-          <div className="status-left">說明:</div>
-          <div className="status-right">狀態:</div>
+        <div className='status-bar'>
+          <div className='status-left'>說明:</div>
+          <div className='status-right'>狀態:</div>
         </div>
       </div>
     </div>
